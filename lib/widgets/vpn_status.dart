@@ -1,3 +1,4 @@
+import 'package:begzar/model/server_model.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +7,7 @@ import 'package:lottie/lottie.dart';
 class VpnCard extends StatefulWidget {
   final int downloadSpeed;
   final int uploadSpeed;
-  final String selectedServer;
+  final ServerModel selectedServer;
   final String selectedServerLogo;
   final String duration;
 
@@ -103,7 +104,7 @@ class _VpnCardState extends State<VpnCard> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        widget.selectedServer,
+                        widget.selectedServer.location,
                         style: TextStyle(
                           color: Colors.grey[300],
                           fontFamily: 'GM',
@@ -298,19 +299,21 @@ Future<Map<String, String>> getIpApi() async {
   try {
     final dio = Dio();
 
-    final response = await dio.get(
-      'https://freeipapi.com/api/json',
-      options: Options(
-        headers: {
-          'X-Content-Type-Options': 'nosniff',
-        },
-      ),
-    );
+    var response = await dio.get('http://ip-api.com/json/',
+        options: Options(
+            // followRedirects: true,
+            // validateStatus: (status) => true,
+            // receiveTimeout: const Duration(seconds: 10),
+            headers: {
+              // "Accept": "*/*",
+              // "Content-Type": "application/json",
+            }));
+    print(response.data);
 
     if (response.statusCode == 200) {
       final data = response.data;
       if (data != null && data is Map) {
-        String ip = data['ipAddress'] ?? 'Unknown IP';
+        String ip = data['query'] ?? 'Unknown IP';
 
         if (ip.contains('.')) {
           // IPv4

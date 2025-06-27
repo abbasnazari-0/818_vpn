@@ -3,9 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_v2ray/flutter_v2ray.dart';
 import 'package:iconsax/iconsax.dart';
 import 'dart:math';
-import 'dart:io';
+
 import 'package:dio/dio.dart';
-import 'package:dio/io.dart';
 
 class NavigationRailWidget extends StatefulWidget {
   final int selectedIndex;
@@ -29,29 +28,41 @@ class _NavigationRailWidgetState extends State<NavigationRailWidget> {
 
   Future<Map<String, String>> getIpApi() async {
     try {
+      print('Fetching IP information...');
       final dio = Dio();
-      dio.httpClientAdapter = IOHttpClientAdapter()
-        ..createHttpClient = () {
-          final client = HttpClient();
-          client.findProxy = (uri) {
-            return 'PROXY 127.0.0.1:8569';
-          };
-          return client;
-        };
+      // dio.httpClientAdapter = IOHttpClientAdapter()
+      //   ..createHttpClient = () {
+      //     final client = HttpClient();
+      //     client.findProxy = (uri) {
+      //       return 'PROXY 127.0.0.1:8569';
+      //     };
+      //     return client;
+      //   };
 
-      final response = await dio.get(
-        'https://freeipapi.com/api/json',
-        options: Options(
-          followRedirects: true,
-          validateStatus: (status) => true,
-          receiveTimeout: const Duration(seconds: 10),
-        ),
-      );
+      var response = await dio.get('http://ip-api.com/json/',
+          options: Options(
+              followRedirects: true,
+              validateStatus: (status) => true,
+              // receiveTimeout: const Duration(seconds: 10),
+              headers: {
+                // "Accept": "*/*",
+                // "Content-Type": "application/json",
+              }));
+      print(response.data);
+
+      // final response = await dio.get(
+      //   'https://freeipapi.com/api/json',
+      //   options: Options(
+      //     followRedirects: true,
+      //     validateStatus: (status) => true,
+      //     receiveTimeout: const Duration(seconds: 10),
+      //   ),
+      // );
 
       if (response.statusCode == 200) {
         final data = response.data;
         if (data != null && data is Map) {
-          String ip = data['ipAddress'] ?? 'نامشخص';
+          String ip = data['query'] ?? context.tr('unknown_error');
 
           if (ip.contains('.')) {
             final parts = ip.split('.');

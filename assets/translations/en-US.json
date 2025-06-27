@@ -39,6 +39,63 @@
     "request_limit": "Your request limit has been reached. Please try again in 1 minute.",
     "wallet_address_copied": "The TON wallet address has been copied to your clipboard. You can send TON to support us.",
     "disable_vpn_description": "Are you sure you want to disconnect the VPN?",
-    "disable_vpn_title": "Disconnect VPN"
+    "disable_vpn_title": "Disconnect VPN",
+    "premium_subscription": "Premium",
+    "upgrade_to_premium": "Upgrade Subscription",
+    "account": "Account",
+    "logout": "Log out",
+    "logout_desc": "Are you sure you want to log out?",
+    "login": "Log in",
+    "to_subscription": "Upgrade Account",
+    "unknown_error": "Unknown error.",
+    "insert_code": "Enter your code",
+    "submit": "Submit",
+    "code_success_submit": "Code verified successfully",
+    "code_not_usable": "The entered code is invalid or expired",
+    "sugesstion": "Suggestion",
+    "login_by_code": "Login with code",
+    "continue": "Continue",
+    "now_price": "Current price",
+    "easy_login": "Quick login via Google and Facebook",
+    "premium_feature_1_title": "Bypass Restrictions",
+    "premium_feature_1_description": "With a premium subscription, you can bypass internet restrictions and access global content.",
 
+    "premium_feature_2_title": "Enhanced Security",
+    "premium_feature_2_description": "A premium subscription provides greater security for your connection and protects your information.",
+
+    "premium_feature_3_title": "Global Connection",
+    "premium_feature_3_description": "With a premium subscription, you can connect to global servers and enjoy higher speeds.",
+
+    "premium_feature_4_title": "High Speed",
+    "premium_feature_4_description": "With a premium subscription, you can enjoy higher speeds and a better internet browsing experience.",
+
+    "monthly": "Monthly",
+    "yearly": "Yearly",
+    "3_months": "3 Months",
+
+
+    "auth_user.title": "Authentication",
+    "register": "Register",
+    "password": "Password",
+    "forgot_password": "Forgot Password?",
+"comming_soon": "Coming Soon",
+    "sinup_policy": "By signing up for this application, you agree to our terms and policies.",
+    "send_again": "Resend Code",
+    "signup": "Sign Up",
+    "email_verification": "Email Verification",
+    "email_verification_description": "Please click the link sent to your email to verify your email address."
+    
+
+    ,
+    "payment_screen": "Continue Payment Process",
+    "upload_receipt": "Upload Payment Receipt",
+    "online_payment": "Online Payment",
+    "payment_methods": "Payment Methods",
+    "pay": "Pay",
+    "processing": "Processing",
+    "payment_success": "Payment was successful",
+    "payment_failed": "Payment failed",
+    "upload_receipt_error": "Error uploading payment receipt",
+    "receipt_uploaded": "Payment receipt uploaded successfully",
+    "receipt_uploaded_description": "It may take 5-10 minutes for your subscription to be activated."
 }

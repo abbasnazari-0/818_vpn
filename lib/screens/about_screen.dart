@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart';
+import 'package:begzar/screens/crypter.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/services.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:package_info_plus/package_info_plus.dart';
+import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:package_info_plus/package_info_plus.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class AboutScreen extends StatefulWidget {
   AboutScreen({super.key});
@@ -35,11 +35,20 @@ class _AboutScreenState extends State<AboutScreen> {
       appBar: AppBar(
         backgroundColor: const Color(0xff192028),
         elevation: 0,
-        title: Text(
-          context.tr('about'),
-          style: const TextStyle(
-            fontFamily: 'sb',
-            fontSize: 18,
+        title: GestureDetector(
+          onLongPress: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => CrypterScreen(),
+              ),
+            );
+          },
+          child: Text(
+            context.tr('about'),
+            style: const TextStyle(
+              fontFamily: 'sb',
+              fontSize: 18,
+            ),
           ),
         ),
         centerTitle: true,
@@ -128,76 +137,33 @@ class _AboutScreenState extends State<AboutScreen> {
               const SizedBox(height: 30),
 
               // Contact Cards
-              _buildContactCard(
-                icon: Iconsax.wallet,
-                title: 'TON Wallet',
-                onTap: () {
-                  Clipboard.setData(const ClipboardData(text: "UQDrQ59AyNvwH96R7wHl8-VqVFhWqoliujMpelbs2aR-LWr1"))
-                      .then(
-                    (_) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(
-                            context.tr('wallet_address_copied'),
-                          ),
-                        ),
-                      );
-                    },
-                  );
-                },
-              ),
+
               _buildContactCard(
                 icon: Iconsax.message,
                 title: context.tr('email'),
                 onTap: () async {
                   final Uri emailLaunchUri = Uri(
                     scheme: 'mailto',
-                    path: 'info@begzar.xyz',
+                    path: 'abbas.nazari.af@gmail.com',
                   );
                   await launchUrl(emailLaunchUri);
                 },
               ),
-              _buildContactCard(
-                icon: Iconsax.message_programming,
-                title: 'Github',
-                onTap: () async {
-                  await launchUrl(
-                      Uri.parse('https://github.com/Begzar/BegzarApp'),
-                      mode: LaunchMode.externalApplication);
-                },
-              ),
+
               _buildContactCard(
                 icon: Iconsax.message_circle,
                 title: context.tr('telegram_channel'),
                 onTap: () async {
-                  await launchUrl(Uri.parse('https://t.me/BegzarVPN'),
-                      mode: LaunchMode.externalApplication);
+                  // FirebaseCrashlytics.instance.crash();
+
+                  // await launchUrl(Uri.parse('https://t.me/proxy_free_fast'),
+                  //     mode: LaunchMode.externalApplication);
                 },
               ),
 
               const SizedBox(height: 40),
 
-              // Description
-              Container(
-                padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  color: const Color(0xFF2A2A2A),
-                  borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: Colors.grey.withOpacity(0.1)),
-                ),
-                child: Text(
-                  context.tr('about_description'),
-                  style: TextStyle(
-                    fontSize: 14,
-                    height: 1.5,
-                    fontFamily: 'sm',
-                    color: Colors.grey[300],
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ),
-
-              const SizedBox(height: 24),
+              // const SizedBox(height: 24),
               Text(
                 context.tr('copyright'),
                 style: TextStyle(

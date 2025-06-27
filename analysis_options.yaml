@@ -24,6 +24,7 @@ linter:
 analyzer:
   errors:
     unused_local_variable: ignore
+    deprecated_member_use: ignore
     # avoid_print: false  # Uncomment to disable the `avoid_print` rule
     # prefer_single_quotes: true  # Uncomment to enable the `prefer_single_quotes` rule
 

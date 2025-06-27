@@ -39,6 +39,62 @@
     "request_limit" : "محدودیت درخواست های شما پر شده است لطفا 1 دقیقه دیگر تلاش کنید.",
     "wallet_address_copied": "ادرس کیف پول TON در کلیپ بورد شما کپی شد، میتوانید برای حمایت از ما TON واریز کنین.",
     "disable_vpn_description": "آیا مطمئن هستید که می‌خواهید فیلترشکن را قطع کنید؟", 
-    "disable_vpn_title": "قطع فیلترشکن"
+    "disable_vpn_title": "قطع فیلترشکن",
+    "premium_subscription": "اشتراک",
+    "upgrade_to_premium": "ارتقا اشتراک",
+    "account": "حساب کاربری",
+    "logout": "خروج از حساب کاربری",
+    "login": "ورود به حساب کاربری",
+    "to_subscription" : "ارتقا کاربری",
+    "unknown_error": "خطای ناشناخته.",
+    "insert_code": "کد خود را وارد کنید",
+    "submit": "ارسال",
+    "code_success_submit": "کد با موفقیت تایید شد",
+    "code_not_usable": "کد وارد شده معتبر نیست یا منقضی شده است",
+    "sugesstion": "پیشنهادی",
+    "login_by_code": "ورود با کد",
+    "continue": "ادامه",
+    "now_price": "قیمت فعلی",
+    "easy_login": "وارد شدن سریع از طریق حساب گوگل و فیس‌بوک",
+
+    "premium_feature_1_title": "عبور از محدودیت‌ها",
+    "premium_feature_1_description": "با اشتراک پریمیوم، می‌توانید از محدودیت‌های اینترنت عبور کنید و به محتوای جهانی دسترسی پیدا کنید.",
+
+    "premium_feature_2_title": "امنیت بیشتر",
+    "premium_feature_2_description": "با اشتراک پریمیوم، امنیت بیشتری برای اتصال شما فراهم می‌شود و اطلاعات شما محافظت می‌شود.",
+
+    "premium_feature_3_title": "اتصال جهانی",
+    "premium_feature_3_description": "با اشتراک پریمیوم، می‌توانید به سرورهای جهانی متصل شوید و از سرعت بالاتری برخوردار شوید.",
+
+    "premium_feature_4_title": "سرعت بالا",
+    "premium_feature_4_description": "با اشتراک پریمیوم، می‌توانید از سرعت بالاتری برخوردار شوید و تجربه بهتری در مرور اینترنت داشته باشید.",
+    "logout_desc": "آیا مطمئن هستید که می‌خواهید از حساب کاربری خود خارج شوید؟",
+    "monthly": "ماهانه",
+    "yearly": "سالانه",
+    "3_months": "سه ماهه",
+    "auth_user.title": "ورود به حساب کاربری",
+    "register": "ثبت نام",
+    "password": "رمز عبور",
+    "forgot_password": "رمز عبور را فراموش کرده‌اید؟",
+
+    "sinup_policy": "با ثبت‌نام در این اپلیکیشن، شما با شرایط و قوانین ما موافقت می‌کنید.",
+    "comming_soon": "به زودی",
+    "send_again": "ارسال مجدد کد",
+    "signup" : "ثبت نام",
+"email_verification": "تایید ایمیل",
+    "email_verification_description": "لطفاً برای تایید ایمیل خود، روی لینک ارسال شده به ایمیل خود کلیک کنید.",
+
+
+    "payment_screen": "ادامه فرایند پرداخت",
+    "upload_receipt": "آپلود رسید پرداخت",
+    "online_payment": "پرداخت آنلاین",
+    "payment_methods": "روش‌های پرداخت",
+    "pay": "پرداخت",
+    "processing": "در حال بررسی",
+    "payment_success": "پرداخت با موفقیت انجام شد",
+    "payment_failed": "پرداخت ناموفق بود",
+    "upload_receipt_error": "خطا در آپلود رسید پرداخت",
+    "receipt_uploaded": "رسید پرداخت با موفقیت آپلود شد",
+    "receipt_uploaded_description": "ممکن است ۵ - ۱۰ دقیقه طول بکشد تا اشتراک شما فعال شود."
 
 }

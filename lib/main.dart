@@ -1,17 +1,55 @@
 import 'package:begzar/common/theme.dart';
+import 'package:begzar/model/subscribtion_model.dart';
+import 'package:begzar/model/user_model.dart';
 import 'package:begzar/screens/about_screen.dart';
 import 'package:begzar/screens/home_screen.dart';
 import 'package:begzar/screens/settings_screen.dart';
 import 'package:begzar/widgets/navigation_rail_widget.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_v2ray/model/v2ray_status.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+// import 'package:hive/hive.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:safe_device/safe_device.dart';
 
+import 'notification_service.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp();
+  // MobileAds.instance.initialize();
+  await NotificationService().initialize();
+  FirebaseAnalytics analytics = FirebaseAnalytics.instance;
+
+  // Initialize Hive
+
+  await Hive.initFlutter();
+
+// Register adapter for User class
+  Hive.registerAdapter<UserInfo>(UserInfoAdapter());
+  Hive.registerAdapter<SubscribtionModel>(SubscribtionModelAdapter());
+  // FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
+  //
+  // if (kDebugMode) {
+  //   FirebaseCrashlytics.instance
+  //       .setCrashlyticsCollectionEnabled5(true); //disable false
+  // } else {
+  //   FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
+  // }
+
+  MobileAds.instance.updateRequestConfiguration(
+    RequestConfiguration(
+      testDeviceIds: [
+        'D79B1AC1C7E2CC1A9ED38C9C9C4BCDBF'
+      ], // Replace with your test device ID
+    ),
+  );
   bool isJailBroken = await SafeDevice.isJailBroken;
   if (isJailBroken != true) {
     await EasyLocalization.ensureInitialized();
@@ -19,6 +57,7 @@ void main() async {
       systemNavigationBarColor: ThemeColor.backgroundColor,
       systemNavigationBarIconBrightness: Brightness.light,
     ));
+    // Dio dio =
     runApp(
       EasyLocalization(
         supportedLocales: [
@@ -55,7 +94,7 @@ class _MyAppState extends State<MyApp> {
     final defaultTextStyle =
         TextStyle(fontFamily: 'sm', color: Color(0xffF7FAFF));
     return MaterialApp(
-      title: 'Begzar VPN',
+      title: '818 Flash VPN',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         textTheme: TextTheme(
