@@ -1,5 +1,5 @@
 {
-    "app_title": "Begzar",
+    "app_title": "818 FLASH VPN",
     "disconnected": "DISCONNECTED",
     "select_server": "Select Server",
     "selected_server": "Automatic",
@@ -17,9 +17,9 @@
     "connecting": "CONNECTING ...",
     "version_title": "Version",
     "about": "About us",
-    "email": "Email: info@begzar.xyz",
-    "copyright": "© 2024 Begzar. All rights reserved.",
-    "about_description": "Begzar is an open-source software designed to provide unrestricted access to the internet. This project is developed with the aim of providing a secure and reliable solution for users, and any commercial or non-commercial use of the Begzar source code is not permitted.",
+    "email": "Email: info@818flashvpn.xyz",
+    "copyright": "© 2025 818 FLASH VPN. All rights reserved.",
+    "about_description": "818 FLASH VPN is an open-source software designed to provide unrestricted access to the internet. This project is developed with the aim of providing a secure and reliable solution for users, and any commercial or non-commercial use of the 818 FLASH VPN source code is not permitted.",
     "error_timeout": "The connection to the server timed out, please try again.",
     "error_domain": "Error retrieving data, please try again.",
     "error_get_version": "Error checking the application version, please try again.",
@@ -37,6 +37,8 @@
     "total_usage": "Total usage",
     "vpn_connection": "You are currently connected to another VPN. Please turn it off and try again.",
     "request_limit": "Your request limit has been reached. Please try again in 1 minute.",
-    "wallet_address_copied": "The TON wallet address has been copied to your clipboard. You can send TON to support us."
+    "wallet_address_copied": "The TON wallet address has been copied to your clipboard. You can send TON to support us.",
+    "disable_vpn_description": "Are you sure you want to disconnect the VPN?",
+    "disable_vpn_title": "Disconnect VPN"
 
 }

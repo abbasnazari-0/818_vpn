@@ -1,5 +1,5 @@
 {
-    "app_title": "Begzar",
+    "app_title": "818 Flash VPN",
     "disconnected": "已断开连接",
     "select_server": "选择服务器",
     "selected_server": "自动",
@@ -17,9 +17,9 @@
     "connecting": "正在连接 ...",
     "version_title": "版本",
     "about": "关于我们",
-    "email": "邮箱: info@begzar.xyz",
-    "copyright": "© 2024 Begzar. 版权所有。",
-    "about_description": "Begzar 是一款开源软件，旨在提供不受限制的互联网访问。此项目旨在为用户提供安全可靠的解决方案，Begzar 源代码的任何商业或非商业用途均被禁止。",
+    "email": "邮箱: info@818flashvpn.xyz",
+    "copyright": "© 2025 818 FLASH VPN. 版权所有。",
+    "about_description": "818 FLASH VPN 是一款开源软件，旨在提供不受限制的互联网访问。此项目旨在为用户提供安全可靠的解决方案，818 FLASH VPN 源代码的任何商业或非商业用途均被禁止。",
     "error_timeout": "连接服务器超时，请重试。",
     "error_domain": "获取数据错误，请重试。",
     "error_get_version": "检查应用版本时出错，请重试。",
@@ -37,7 +37,9 @@
     "total_usage": "总使用量",
     "vpn_connection": "您当前已连接到其他 VPN。请先关闭它，然后重试。",
     "request_limit": "您的请求次数已达上限，请 1 分钟后再试。",
-    "wallet_address_copied": "TON 钱包地址已复制到您的剪贴板。您可以汇款 TON 以支持我们。"
+    "wallet_address_copied": "TON 钱包地址已复制到您的剪贴板。您可以汇款 TON 以支持我们。",
+    "disable_vpn_description": "您确定要断开 VPN 吗？",
+    "disable_vpn_title": "断开 VPN"
 
 
 }
