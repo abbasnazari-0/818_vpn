@@ -14,18 +14,22 @@ class SubscribtionModel {
   String? start;
   @HiveField(3)
   String? end;
+  @HiveField(4)
+  MassSubModel? mass;
 
   SubscribtionModel({
     required this.planName,
     required this.start,
     required this.end,
+    required this.mass,
   });
 
   // empty
   SubscribtionModel.empty()
       : planName = '',
         start = null,
-        end = null;
+        end = null,
+        mass = null;
 
   // from json
   factory SubscribtionModel.fromJson(Map<String, dynamic> json) {
@@ -33,6 +37,9 @@ class SubscribtionModel {
       planName: json['plan_name'] ?? '',
       start: json['start'] ?? '',
       end: json['end'] ?? '',
+      mass: json['mass'] != null
+          ? MassSubModel.fromJson(json['mass'])
+          : MassSubModel.empty(),
     );
   }
 
@@ -159,5 +166,61 @@ class SubscribtionModel {
     } catch (e) {
       return 0.0;
     }
+  }
+}
+
+@HiveType(typeId: 3)
+class MassSubModel {
+  // "mass": {
+  //           "used_volume": "238.63",
+  //           "total_volume": "20"
+  //       }
+
+  @HiveField(1)
+  String usedVolume;
+  @HiveField(2)
+  String totalVolume;
+  MassSubModel({
+    required this.usedVolume,
+    required this.totalVolume,
+  });
+
+  // empty
+  MassSubModel.empty()
+      : usedVolume = '',
+        totalVolume = '';
+
+  // from json
+  factory MassSubModel.fromJson(Map<String, dynamic> json) {
+    return MassSubModel(
+      usedVolume: json['used_volume'] ?? '',
+      totalVolume: json['total_volume'] ?? '',
+    );
+  }
+
+  // get used volume as double
+  double getUsedVolume() {
+    try {
+      return double.parse(usedVolume);
+    } catch (e) {
+      return 0.0;
+    }
+  }
+
+  // get total volume as double
+  double getTotalVolume() {
+    try {
+      return double.parse(totalVolume);
+    } catch (e) {
+      return 0.0;
+    }
+  }
+
+  // get progress as double
+  double getProgress() {
+    final used = getUsedVolume();
+    final total = getTotalVolume();
+    if (total <= 0) return 0.0;
+    return (used / total).clamp(0.0, 1.0);
   }
 }

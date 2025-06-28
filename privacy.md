@@ -87,3 +87,4 @@ You can request data deletion by contacting our support via the following Telegr
 ---
 
 © 2025 Begzar VPN. All rights reserved.
+

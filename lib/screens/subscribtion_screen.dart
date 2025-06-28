@@ -301,7 +301,15 @@ class _SubscribtionScreenState extends State<SubscribtionScreen> {
                         //     duration: const Duration(seconds: 2),
                         //   ),
                         // );
-
+                        if (subscribtionPlans.isEmpty) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(context.tr('no_plans_available')),
+                              duration: const Duration(seconds: 2),
+                            ),
+                          );
+                          return;
+                        }
                         // go to route PaymentScreen
                         Navigator.of(context).push(
                           MaterialPageRoute(

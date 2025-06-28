@@ -34,6 +34,7 @@ void main() async {
 // Register adapter for User class
   Hive.registerAdapter<UserInfo>(UserInfoAdapter());
   Hive.registerAdapter<SubscribtionModel>(SubscribtionModelAdapter());
+  Hive.registerAdapter<MassSubModel>(MassSubModelAdapter());
   // FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
   //
   // if (kDebugMode) {

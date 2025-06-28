@@ -35,4 +35,29 @@ class Utils {
     }
     return null;
   }
+
+  // create a function to convert mb to all other units
+
+  String convertToGBorMB(String usage) {
+    usage = usage.trim().toLowerCase();
+
+    double value;
+    if (usage.endsWith('gb')) {
+      value = double.tryParse(usage.replaceAll('gb', '').trim()) ?? 0.0;
+    } else if (usage.endsWith('mb')) {
+      value =
+          (double.tryParse(usage.replaceAll('mb', '').trim()) ?? 0.0) / 1024;
+    } else {
+      value = (double.tryParse(usage) ?? 0.0) / 1024;
+    }
+
+    if (value < 1) {
+      // Return as MB
+      double mbValue = value * 1024;
+      return "${mbValue.toStringAsFixed(2)} MB";
+    } else {
+      // Return as GB
+      return "${value.toStringAsFixed(2)} GB";
+    }
+  }
 }

@@ -84,7 +84,7 @@ class _HomePageState extends State<HomePage> {
     String countryCode = ipInfo?['countryCode'];
     print(ipInfo);
     // print(await _checkAndsSub());
-    if (countryCode == "IR" && await _checkAndsSub() == false) {
+    if (countryCode == "AE" && await _checkAndsSub() == false) {
       setState(() {
         showUpgrade = true;
       });
@@ -730,14 +730,22 @@ class _HomePageState extends State<HomePage> {
                 await Hive.openBox<SubscribtionModel>('subscribtion');
             await subBox.put('subscribtion', subscribtionModel);
 
-            servers = List<ServerModel>.from(
-                res.data['configs'].map((item) => ServerModel(
-                      "",
-                      "",
-                      config: item,
-                      location: "",
-                      id: 1,
-                    )));
+            final List configs = (res.data['configs']);
+
+            configs.forEach((item) {
+              servers.add(
+                ServerModel(
+                  "",
+                  "",
+                  config: item,
+                  location: "",
+                  id: 1,
+                ),
+              );
+
+              // print(item);
+              // print(item['config']);
+            });
 
             //  ServerModel(
             //       "",
@@ -1067,22 +1075,64 @@ class SubscribtionStatus extends StatelessWidget {
                           "${subscribtionModel?.getFormattedRangeFa().toString()}"),
                     ],
                   ),
+                  SizedBox(
+                    height: 30,
+                    width: 150,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          (Utils().convertToGBorMB(
+                              subscribtionModel?.mass?.usedVolume ?? '')),
+                          style: TextStyle(
+                            fontFamily: 'GM',
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14,
+                            color: Colors.orangeAccent,
+                          ),
+                        ),
+                        // const Spacer(),
+                        Text(
+                          (Utils().convertToGBorMB(
+                              subscribtionModel?.mass?.totalVolume ?? '')),
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontFamily: 'GM',
+                            fontSize: 14,
+                            color: Colors.orangeAccent,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
 
-              _buildIpButton()
+              const SizedBox(width: 10),
+
+              _buildIpButton(context)
               // تمدید اشتراک button
             ],
           ),
           LinearProgressIndicator(
-            value: subscribtionModel?.getProgress(),
+            value: subscribtionModel?.mass?.getProgress() ?? 0.0,
+            backgroundColor: Colors.grey.withOpacity(0.2),
+            valueColor: AlwaysStoppedAnimation<Color>(Colors.orangeAccent),
+            // set rounded corners
+            minHeight: 8,
+
+            borderRadius: BorderRadius.circular(99),
+
+            // set height
+            semanticsLabel: 'Subscription Progress',
+            // semanticsValue: '${subscribtionModel?.mass?.getProgress() * 100}
           )
         ],
       ),
     );
   }
 
-  Widget _buildIpButton() {
+  Widget _buildIpButton(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
         color: const Color(0xFF353535),
@@ -1103,6 +1153,11 @@ class SubscribtionStatus extends StatelessWidget {
             //   ipText = ipInfo['ip'];
             //   isLoading = false;
             // });
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => SubscribtionScreen(),
+              ),
+            );
           },
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
