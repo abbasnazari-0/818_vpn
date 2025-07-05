@@ -1,10 +1,8 @@
 import 'package:begzar/common/utils.dart';
 import 'package:begzar/model/plan_model.dart';
-
 import 'package:begzar/model/user_model.dart';
 import 'package:begzar/screens/auth_user_screen.dart';
 import 'package:begzar/screens/payment_screen.dart';
-
 import 'package:begzar/widgets/code_inputer.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -12,6 +10,9 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+
+import '../model/subscribtion_model.dart';
+import 'home_screen.dart';
 
 class SubscribtionScreen extends StatefulWidget {
   SubscribtionScreen({super.key});
@@ -45,6 +46,7 @@ class _SubscribtionScreenState extends State<SubscribtionScreen> {
 
   @override
   Widget build(BuildContext context) {
+    _check_userSub(context);
     List feature = [
       {
         "title": context.tr('premium_feature_1_title'),
@@ -283,13 +285,15 @@ class _SubscribtionScreenState extends State<SubscribtionScreen> {
                   InkWell(
                     onTap: () {
                       // go to auth screen
-                      _checkAndlogin().then((isLoggedIn) {
+                      _checkAndlogin().then((isLoggedIn) async {
                         if (!isLoggedIn) {
-                          Navigator.of(context).push(
+                          await Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (context) => AuthUserScreen(),
                             ),
                           );
+
+                          _check_userSub(context);
                           return;
                         }
 
@@ -445,6 +449,90 @@ class _SubscribtionScreenState extends State<SubscribtionScreen> {
     } else {
       // Handle HTTP error
       print('HTTP error: ${res.statusCode}');
+    }
+  }
+
+  _check_userSub(BuildContext context) async {
+    // https://818.arianadevs.com/818_vpn/v1/payment/check_user_sub.php?uid=5CfQJyGiQ0WdMg7h70I3syzK0Zp2
+    Dio dio = Dio();
+
+    // ScaffoldMessenger.of(context).showSnackBar(
+    //   SnackBar(
+    //     content: Text(
+    //       context.tr('checking_subscription'),
+    //     ),
+    //   ),
+    // );
+    final box = await Hive.openBox<UserInfo>('users');
+    UserInfo? userInfo = box.get('users');
+    print(userInfo?.uuid);
+    if (userInfo == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            context.tr('please_login_first'),
+          ),
+        ),
+      );
+
+      return;
+    }
+    // print(userInfo?);
+    var res = await dio.get(
+      '${Utils.base_url}/818_vpn/v1/payment/check_user_sub.php?uid=${userInfo?.uuid}',
+    );
+
+    if (res.statusCode == 200) {
+      UserInfo userInfo = UserInfo.fromJson(res.data);
+
+      if (res.data['subscribtion'] == null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              context.tr('no_active_subscription'),
+            ),
+          ),
+        );
+        // Utils.showError(
+        //   context,
+        //   'اشتراک فعالی وجود ندارد',
+        // );
+
+        return;
+      }
+      SubscribtionModel subscribtionModel =
+          SubscribtionModel.fromJson(res.data['subscribtion']);
+
+      final box = await Hive.openBox<UserInfo>('users');
+      await box.put('users', userInfo);
+
+      final subBox = await Hive.openBox<SubscribtionModel>('subscribtion');
+      await subBox.put('subscribtion', subscribtionModel);
+
+      // نمایش پیام موفقیت
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(context.tr('code_success_submit'))),
+      );
+
+      // بستن دیالوگ
+      // Close all page and go to home page
+      // Navigator.of(context).popUntil((route) => route.isFirst);
+      Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (context) => HomePage()),
+        (route) => false,
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            context.tr('error_checking_subscription'),
+          ),
+        ),
+      );
+      // Utils.showError(
+      //   context,
+      //   'خطا در بررسی اشتراک',
+      // );
     }
   }
 }

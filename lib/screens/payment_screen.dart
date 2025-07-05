@@ -1,21 +1,21 @@
 import 'dart:io';
 
 import 'package:begzar/common/page_status.dart';
+import 'package:begzar/common/utils.dart';
+import 'package:begzar/model/payment_method.dart';
 import 'package:begzar/model/plan_model.dart';
 import 'package:begzar/model/subscribtion_model.dart';
 import 'package:begzar/model/user_model.dart';
 import 'package:begzar/screens/home_screen.dart';
 import 'package:begzar/screens/receipt_waiting_room.dart';
-import 'package:hive/hive.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:begzar/common/utils.dart';
-import 'package:begzar/model/payment_method.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart'
     show BuildContextEasyLocalizationExtension;
 // import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:image_picker/image_picker.dart';
 
 class PaymentScreen extends StatefulWidget {
   const PaymentScreen({super.key, required this.planModelSelected});
@@ -31,6 +31,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
   @override
   void initState() {
     _loadPaymentMethod();
+
+    _check_userSub();
     super.initState();
   }
 
@@ -397,6 +399,19 @@ class _PaymentScreenState extends State<PaymentScreen> {
     final box = await Hive.openBox<UserInfo>('users');
     UserInfo? userInfo = box.get('users');
     print(userInfo?.uuid);
+
+    if (userInfo == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            context.tr('please_login_first'),
+          ),
+        ),
+      );
+
+      return;
+    }
+
     // print(userInfo?);
     var res = await dio.get(
       '${Utils.base_url}/818_vpn/v1/payment/check_user_sub.php?uid=${userInfo?.uuid}',

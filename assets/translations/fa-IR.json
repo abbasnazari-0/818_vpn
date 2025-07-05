@@ -95,6 +95,10 @@
     "payment_failed": "پرداخت ناموفق بود",
     "upload_receipt_error": "خطا در آپلود رسید پرداخت",
     "receipt_uploaded": "رسید پرداخت با موفقیت آپلود شد",
-    "receipt_uploaded_description": "ممکن است ۵ - ۱۰ دقیقه طول بکشد تا اشتراک شما فعال شود."
+    "receipt_uploaded_description": "ممکن است ۵ - ۱۰ دقیقه طول بکشد تا اشتراک شما فعال شود.",
+
+    "please_login_first": "لطفاً ابتدا وارد حساب کاربری خود شوید.",
+    "no_active_subscription": "شما هیچ اشتراک فعالی ندارید.",
+    "back_to_home": "بازگشت به صفحه اصلی"
 
 }

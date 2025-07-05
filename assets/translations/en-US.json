@@ -97,5 +97,11 @@
     "payment_failed": "Payment failed",
     "upload_receipt_error": "Error uploading payment receipt",
     "receipt_uploaded": "Payment receipt uploaded successfully",
-    "receipt_uploaded_description": "It may take 5-10 minutes for your subscription to be activated."
+    "receipt_uploaded_description": "It may take 5-10 minutes for your subscription to be activated.",
+
+    "please_login_first": "Please log in to your account first.",
+    "no_active_subscription": "You do not have any active subscriptions.",
+    "back_to_home": "Back to Home"
+
+
 }

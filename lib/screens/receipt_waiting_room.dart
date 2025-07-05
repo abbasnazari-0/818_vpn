@@ -4,10 +4,11 @@ import 'dart:io';
 import 'package:begzar/common/page_status.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
-
 import 'package:flutter/material.dart';
-
+import 'package:hive/hive.dart' show Hive;
 import 'package:scanning_effect/scanning_effect.dart';
+
+import '../model/user_model.dart';
 
 class ReceiptWaitingRoomPage extends StatefulWidget {
   const ReceiptWaitingRoomPage({super.key, this.receiptImage});
@@ -168,7 +169,7 @@ class _ReceiptWaitingRoomPageState extends State<ReceiptWaitingRoomPage> {
                     ),
                   ),
                   child: Text(
-                    'برگشت به خانه',
+                    context.tr('back_to_home'),
                     style: const TextStyle(
                       fontFamily: 'sb',
                       fontSize: 16,
@@ -207,17 +208,26 @@ class _ReceiptWaitingRoomPageState extends State<ReceiptWaitingRoomPage> {
 
   _check_payment() async {
     try {
+      final box = await Hive.openBox<UserInfo>('users');
+      UserInfo? userInfo = box.get('users');
       var dio = Dio();
+      print(
+        {
+          'user': userInfo?.uuid,
+          'action': 'check', // Example receipt ID, replace with actual
+        },
+      );
       var response = await dio.get(
         'https://818.arianadevs.com/818_vpn/v1/payment/card_payment.php',
         // options: Options(
         //   method: 'GET',
         // ),
         queryParameters: {
-          'user': '1',
+          'user': userInfo?.uuid,
           'action': 'check', // Example receipt ID, replace with actual
         },
       );
+      print('Checking payment status... ${response.statusCode}');
 
       if (response.statusCode == 200) {
         print(json.encode(response.data));

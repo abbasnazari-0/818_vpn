@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 class NotificationService {
@@ -17,7 +18,7 @@ class NotificationService {
 
     // Request notification permissions
     await _firebaseMessaging.requestPermission();
-    _firebaseMessaging.subscribeToTopic('all'); // Subscribe to a topic
+    await _firebaseMessaging.subscribeToTopic('all'); // Subscribe to a topic
 
     // Initialize local notifications
     const AndroidInitializationSettings androidSettings =
@@ -39,7 +40,7 @@ class NotificationService {
 
     // Get the FCM token (optional, for debugging or sending messages)
     String? token = await _firebaseMessaging.getToken();
-    print('FCM Token: $token');
+    debugPrint('FCM Token: $token');
   }
 
   void _onMessage(RemoteMessage message) {

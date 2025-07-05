@@ -91,6 +91,10 @@
     "payment_failed": "支付失败",
     "upload_receipt_error": "上传付款凭证时出错",
     "receipt_uploaded": "付款凭证上传成功",
-    "receipt_uploaded_description": "您的订阅可能需要 5-10 分钟才能激活。"
+    "receipt_uploaded_description": "您的订阅可能需要 5-10 分钟才能激活。",
+
+    "please_login_first": "请先登录您的账户。",
+    "no_active_subscription": "您没有任何有效订阅。",
+    "back_to_home": "返回主页"
 
 }
